@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -26,5 +28,19 @@ public class ProductController {
         Product entity = modelMapper.map(product, Product.class);
 
         return modelMapper.map(service.save(entity), ProductDTO.class);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductDTO> getProducts(){
+        List<ProductDTO> productsDTO = new ArrayList<>();
+        List<Product> products = service.getProducts();
+
+        products.forEach(product -> {
+           ProductDTO productDTO =  modelMapper.map(product, ProductDTO.class);
+            productsDTO.add(productDTO);
+        });
+
+        return productsDTO;
     }
 }
