@@ -1,8 +1,8 @@
 package com.antunesrs.productms.application.rest.controller;
 
-import com.antunesrs.productms.application.rest.dto.ProductDTO;
-import com.antunesrs.productms.application.rest.model.Product;
-import com.antunesrs.productms.application.rest.services.ProductService;
+import com.antunesrs.productms.application.rest.domain.dto.ProductDTO;
+import com.antunesrs.productms.application.rest.domain.model.Product;
+import com.antunesrs.productms.application.rest.domain.services.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,5 +42,13 @@ public class ProductController {
         });
 
         return productsDTO;
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDTO findById(@PathVariable Long id){
+        Product product = service.findById(id);
+
+        return modelMapper.map(product, ProductDTO.class);
     }
 }

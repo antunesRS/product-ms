@@ -1,4 +1,4 @@
-package com.antunesrs.productms.application.rest.model;
+package com.antunesrs.productms.application.rest.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.AllArgsConstructor;

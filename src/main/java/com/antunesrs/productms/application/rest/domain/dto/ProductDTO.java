@@ -1,4 +1,4 @@
-package com.antunesrs.productms.application.rest.dto;
+package com.antunesrs.productms.application.rest.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,19 +16,19 @@ import java.util.Date;
 public class ProductDTO {
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String name;
 
-    @NotEmpty
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String barCode;
 
-    @NotEmpty
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String description;
 
-    @NotNull
+    @NotNull(message = "Preenchimento obrigatório")
     private Double price;
 
-    @NotEmpty
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String brand;
 
     private Date dueDate;

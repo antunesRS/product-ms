@@ -1,6 +1,6 @@
-package com.antunesrs.productms.application.rest.repository;
+package com.antunesrs.productms.application.rest.domain.repository;
 
-import com.antunesrs.productms.application.rest.model.Product;
+import com.antunesrs.productms.application.rest.domain.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
