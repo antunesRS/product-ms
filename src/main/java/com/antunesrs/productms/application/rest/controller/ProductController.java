@@ -51,4 +51,12 @@ public class ProductController {
 
         return modelMapper.map(product, ProductDTO.class);
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDTO updateProduct(@PathVariable long id, @RequestBody @Valid ProductDTO product){
+        Product entity = modelMapper.map(product, Product.class);
+
+        return modelMapper.map(service.update(id, entity), ProductDTO.class);
+    }
 }

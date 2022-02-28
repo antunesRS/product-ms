@@ -1,6 +1,7 @@
 package com.antunesrs.productms.application.rest.domain.exceptions.handler;
 
 import com.antunesrs.productms.application.rest.domain.exceptions.ApiErrors;
+import com.antunesrs.productms.application.rest.domain.exceptions.BusinessException;
 import com.antunesrs.productms.application.rest.domain.exceptions.ObjectNotFoundException;
 import com.antunesrs.productms.application.rest.domain.exceptions.StandardError;
 import org.springframework.http.HttpStatus;
@@ -15,16 +16,31 @@ public class ApplicationExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleValidationExceptions(MethodArgumentNotValidException e){
+    public StandardError handleValidationExceptions(MethodArgumentNotValidException e){
 
         BindingResult bindingResult = e.getBindingResult();
-        return new ApiErrors(bindingResult);
+        StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST.value(), "TESTE", System.currentTimeMillis());
+        return standardError;
+        //return new ApiErrors(bindingResult);
     }
+
 
     @ExceptionHandler(ObjectNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public StandardError handleObjectNotFoundException(ObjectNotFoundException e){
         return new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public StandardError handleInternalServerException(Exception e){
+        return new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), System.currentTimeMillis());
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public StandardError handleBusinessException(Exception e){
+        return new StandardError(HttpStatus.UNPROCESSABLE_ENTITY.value(), e.getMessage(), System.currentTimeMillis());
     }
 
 

@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ExceptionCode {
-    NOT_FOUND("Product not found");
+    NOT_FOUND("Product not found"),
+    DUPLICATED_BAR_CODE("Barcode duplicated");
 
     private String description;
 
